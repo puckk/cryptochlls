@@ -21,4 +21,5 @@ jobs:
       - name: Run script
         env:
           FLAG: ${{ secrets.CHALLENGE_FLAG }}
+          SECRET_KEY: ${{ secrets.SECRET_KEY }}
         run: python script.py
