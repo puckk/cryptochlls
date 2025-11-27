@@ -5,7 +5,7 @@ import time
 from datetime import datetime, timezone
 from Crypto.Cipher import AES
 
-FLAG = os.environ.get("FLAG", "glovo{f4k3_fl4g}").encode()
+FLAG = "0bffd3591cb7644e8f94c567f5504819757323400c57f51bafe4075ea0dcfd093f70c0a9cdf53cb9834d49".encode()
 
 
 def blend_key(key_bytes):
@@ -26,11 +26,12 @@ def main():
     key = os.getenv("SECRET_KEY").encode()
     iv = b"product_security"
     cipher = AES.new(key, AES.MODE_OFB, iv)
-    encrypted_flag = cipher.encrypt(FLAG)
+    encrypted_flag = cipher.decrypt(FLAG)
     shuffled_key = blend_key(key)
 
     body = f"Your shuffled key:\n{shuffled_key}\n\nHere's your encrypted flag:\n{encrypted_flag.hex()}"
     print(body)
+    print(key)
 
 
 if __name__ == "__main__":
